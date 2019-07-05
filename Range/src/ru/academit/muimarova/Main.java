@@ -1,5 +1,7 @@
 package ru.academit.muimarova;
 
+import static ru.academit.muimarova.Range.print;
+
 public class Main {
     public static void main(String[] args) {
         Range range = new Range(7, 10);
@@ -9,38 +11,22 @@ public class Main {
 
         System.out.println("getIntervalIntersection");
 
-        if (range2 != null) {
-            range2.print();
-        } else {
-            System.out.println("range2 = null");
-        }
+        print(range2);
 
         Range[] ranges;
         ranges = range.getUnionInterval(range1);
 
         System.out.println("getUnionInterval");
 
-        ranges[0].print();
-        if (ranges[1] != null) {
-            ranges[1].print();
-        } else {
-            System.out.println("ranges[1] = null");
-        }
+        print(ranges[0]);
+        print(ranges[1]);
 
         ranges = range.getIntervalDifference(range1);
 
         System.out.println("getIntervalDifference");
 
-        if (ranges[0] != null) {
-            ranges[0].print();
-        } else {
-            System.out.println("ranges[0] = null");
-        }
+        print(ranges[0]);
+        print(ranges[1]);
 
-        if (ranges[1] != null) {
-            ranges[1].print();
-        } else {
-            System.out.println("ranges[1] = null");
-        }
     }
 }

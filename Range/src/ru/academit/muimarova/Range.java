@@ -78,7 +78,11 @@ public class Range {
         return this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to);
     }
 
-    void print() {
-        System.out.println(from + " - " + to);
+    static void print(Range range) {
+        if (range == null) {
+            System.out.println("range = null");
+        } else {
+            System.out.println(range.from + " - " + range.to);
+        }
     }
 }
