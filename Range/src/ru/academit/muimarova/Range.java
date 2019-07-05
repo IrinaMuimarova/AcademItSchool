@@ -4,7 +4,7 @@ public class Range {
     private double from;
     private double to;
 
-    public double getFrom() {
+    double getFrom() {
         return from;
     }
 
@@ -12,7 +12,7 @@ public class Range {
         this.from = from;
     }
 
-    public double getTo() {
+    double getTo() {
         return to;
     }
 
@@ -20,7 +20,7 @@ public class Range {
         this.to = to;
     }
 
-    public Range(double from, double to) {
+    Range(double from, double to) {
         if (from > to) {
             this.from = to;
             this.to = from;
@@ -34,20 +34,51 @@ public class Range {
         return to - from;
     }
 
-    public boolean isInside(double number) {
+    private boolean isInside(double number) {
         return number >= from && number <= to;
     }
 
-    public Range getIntervalIntersection(Range range) {
-        if (this.from <= range.from) {
-            if (this.to >= range.from) {
-                return new Range(range.from, this.to);
-            }
-        } else if (range.to >= this.from) {
-            return new Range(this.from, range.to);
+    Range getIntervalIntersection(Range range) {
+        if (this.isIntersection(range)) {
+            return new Range(this.from > range.from ? this.from : range.from, this.to < range.to ? this.to : range.to);
         }
         return null;
     }
 
-    public Range[] getUnionInterval(Range range){return null;}
+    Range[] getUnionInterval(Range range) {
+        Range[] ranges = new Range[2];
+        if (this.isIntersection(range)) {
+            ranges[0] = new Range(this.from < range.from ? this.from : range.from, this.to > range.to ? this.to : range.to);
+        } else {
+            ranges[0] = this;
+            ranges[1] = range;
+        }
+        return ranges;
+    }
+
+    Range[] getIntervalDifference(Range range) {
+        Range[] ranges = new Range[2];
+        if (!this.isIntersection(range)) {
+            ranges[0] = this;
+        } else {
+            if (range.from <= this.from && range.to >= this.to) {  //случай когда первый интервал равен или входит в границы второго,
+                return null;                                       // так как в условии не прописан этот сценарий, возвращаю null;
+            } else if (range.from > this.from && range.to < this.to) {
+                ranges[0] = new Range(this.from, range.from);
+                ranges[1] = new Range(range.to, this.to);
+            } else {
+                ranges[0] = new Range(range.to < this.to ? range.to : this.from, range.from > this.from ? range.from : this.to);
+            }
+
+        }
+        return ranges;
+    }
+
+    private boolean isIntersection(Range range) {
+        return this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to);
+    }
+
+    void print() {
+        System.out.println(from + " - " + to);
+    }
 }
