@@ -4,23 +4,7 @@ public class Range {
     private double from;
     private double to;
 
-    double getFrom() {
-        return from;
-    }
-
-    public void setFrom(double from) {
-        this.from = from;
-    }
-
-    double getTo() {
-        return to;
-    }
-
-    public void setTo(double to) {
-        this.to = to;
-    }
-
-    Range(double from, double to) {
+    public Range(double from, double to) {
         if (from > to) {
             this.from = to;
             this.to = from;
@@ -28,6 +12,22 @@ public class Range {
             this.from = from;
             this.to = to;
         }
+    }
+
+    public double getFrom() {
+        return from;
+    }
+
+    public void setFrom(double from) {
+        this.from = from;
+    }
+
+    public double getTo() {
+        return to;
+    }
+
+    public void setTo(double to) {
+        this.to = to;
     }
 
     public double getLength() {
@@ -38,38 +38,43 @@ public class Range {
         return number >= from && number <= to;
     }
 
-    Range getIntervalIntersection(Range range) {
+    public Range getIntersection(Range range) {
         if (this.isIntersection(range)) {
-            return new Range(this.from > range.from ? this.from : range.from, this.to < range.to ? this.to : range.to);
+            return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
         }
         return null;
     }
 
-    Range[] getUnionInterval(Range range) {
-        Range[] ranges = new Range[2];
+    public Range[] getUnion(Range range) {
+        Range[] ranges;
         if (this.isIntersection(range)) {
-            ranges[0] = new Range(this.from < range.from ? this.from : range.from, this.to > range.to ? this.to : range.to);
+            ranges = new Range[1];
+            ranges[0] = new Range(Math.min(this.from, range.from), Math.max(this.to, range.to));
         } else {
-            ranges[0] = this;
-            ranges[1] = range;
+            ranges = new Range[2];
+            ranges[0] = new Range(this.from, this.to);
+            ranges[1] = new Range(range.from, range.to);
         }
         return ranges;
     }
 
-    Range[] getIntervalDifference(Range range) {
-        Range[] ranges = new Range[2];
+    public Range[] getDifference(Range range) {
+        Range[] ranges;
         if (!this.isIntersection(range)) {
-            ranges[0] = this;
+            ranges = new Range[1];
+            ranges[0] = new Range(this.from, this.to);
         } else {
-            if (range.from <= this.from && range.to >= this.to) {  //случай когда первый интервал равен или входит в границы второго,
-                return null;                                       // так как в условии не прописан этот сценарий, возвращаю null;
+            if (range.from <= this.from && range.to >= this.to) {
+                ranges = new Range[0];
+                return ranges;
             } else if (range.from > this.from && range.to < this.to) {
+                ranges = new Range[2];
                 ranges[0] = new Range(this.from, range.from);
                 ranges[1] = new Range(range.to, this.to);
             } else {
-                ranges[0] = new Range(range.to < this.to ? range.to : this.from, range.from > this.from ? range.from : this.to);
+                ranges = new Range[1];
+                ranges[0] = new Range(Math.min(range.to, this.to), Math.max(range.from, this.from));
             }
-
         }
         return ranges;
     }
@@ -78,7 +83,7 @@ public class Range {
         return this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to);
     }
 
-    static void print(Range range) {
+    public static void print(Range range) {
         if (range == null) {
             System.out.println("range = null");
         } else {
