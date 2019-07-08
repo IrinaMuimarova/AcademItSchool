@@ -6,8 +6,8 @@ import static ru.academit.muimarova.Range.print;
 
 public class Main {
     public static void main(String[] args) {
-        Range range = new Range(7, 10);
-        Range range1 = new Range(6, 8);
+        Range range = new Range(3, 10);
+        Range range1 = new Range(5, 8);
 
         Range range2 = range.getIntersection(range1);
 
@@ -21,14 +21,20 @@ public class Main {
         System.out.println("getInterval");
 
         print(ranges[0]);
-        print(ranges[1]);
-
+        try {
+            print(ranges[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Элемента массива не существует." + e);
+        }
         ranges = range.getDifference(range1);
 
         System.out.println("getDifference");
-
-        print(ranges[0]);
-        print(ranges[1]);
+        try {
+            print(ranges[0]);
+            print(ranges[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Элемента массива не существует." + e);
+        }
 
     }
 }
