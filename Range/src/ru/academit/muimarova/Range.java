@@ -68,7 +68,9 @@ public class Range {
     }
 
     private boolean isIntersection(Range range) {
-        return (this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to)) && !(this.from == range.to || this.to == range.from);
+        return (this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to))
+                && (!((this.from == range.to || this.to == range.from) && !(this.from == range.to && this.to == range.from)));
+
     }
 
     public static void print(Range range) {

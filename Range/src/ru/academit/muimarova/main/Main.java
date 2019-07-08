@@ -7,7 +7,7 @@ import static ru.academit.muimarova.Range.print;
 public class Main {
     public static void main(String[] args) {
         Range range = new Range(3, 10);
-        Range range1 = new Range(5, 8);
+        Range range1 = new Range(3, 10);
 
         Range range2 = range.getIntersection(range1);
 
@@ -35,6 +35,5 @@ public class Main {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Элемента массива не существует." + e);
         }
-
     }
 }
