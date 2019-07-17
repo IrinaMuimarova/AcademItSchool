@@ -40,37 +40,41 @@ public class Range {
 
     public Range getIntersection(Range range) {
         if (this.isIntersection(range)) {
-            return new Range(Math.max(this.from, range.from), Math.min(this.to, range.to));
+            return new Range(Math.max(from, range.from), Math.min(to, range.to));
         }
         return null;
     }
 
     public Range[] getUnion(Range range) {
-        if (this.isIntersection(range)) {
-            return new Range[]{new Range(Math.min(this.from, range.from), Math.max(this.to, range.to))};
+        if ((range.to >= from && range.to <= to) || (range.from >= from && range.from <= to) ||
+                (from >= range.from && from <= range.to) || (to >= range.from && to <= range.to)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         } else {
-            return new Range[]{new Range(this.from, this.to), new Range(range.from, range.to)};
+            return new Range[]{new Range(from, to), new Range(range.from, range.to)};
         }
     }
 
     public Range[] getDifference(Range range) {
         if (!this.isIntersection(range)) {
-            return new Range[]{new Range(this.from, this.to)};
+            return new Range[]{new Range(from, to)};
         } else {
-            if (range.from <= this.from && range.to >= this.to) {
+            if (from >= range.from && to <= range.to) {
                 return new Range[0];
-            } else if (range.from > this.from && range.to < this.to) {
-                return new Range[]{new Range(this.from, range.from), new Range(range.to, this.to)};
+            } else if (from < range.from && to > range.to) {
+                return new Range[]{new Range(from, range.from), new Range(range.to, to)};
+            } else if (from < range.from && to <= range.to) {
+                return new Range[]{new Range(from, range.from)};
             } else {
-                return new Range[]{new Range(Math.min(range.to, this.to), Math.max(range.from, this.from))};
+                return new Range[]{new Range(range.to, to)};
             }
+
         }
     }
 
     private boolean isIntersection(Range range) {
-        return (this.isInside(range.to) || this.isInside(range.from) || range.isInside(this.from) || range.isInside(this.to))
-                && (!((this.from == range.to || this.to == range.from) && !(this.from == range.to && this.to == range.from)));
-
+        return ((range.to >= from && range.to <= to) || (range.from >= from && range.from <= to) ||
+                (from >= range.from && from <= range.to) || (to >= range.from && to <= range.to)) &&
+                (!(from == range.to) && !(to == range.from));
     }
 
     public static void print(Range range) {
@@ -79,5 +83,10 @@ public class Range {
         } else {
             System.out.println(range.from + " - " + range.to);
         }
+    }
+
+    @Override
+    public String toString() {
+        return from + ", " + to;
     }
 }

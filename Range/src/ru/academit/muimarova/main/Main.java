@@ -6,8 +6,8 @@ import static ru.academit.muimarova.Range.print;
 
 public class Main {
     public static void main(String[] args) {
-        Range range = new Range(3, 10);
-        Range range1 = new Range(3, 10);
+        Range range = new Range(1, 7);
+        Range range1 = new Range(5, 7);
 
         Range range2 = range.getIntersection(range1);
 
