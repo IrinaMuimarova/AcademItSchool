@@ -46,8 +46,7 @@ public class Range {
     }
 
     public Range[] getUnion(Range range) {
-        if ((range.to >= from && range.to <= to) || (range.from >= from && range.from <= to) ||
-                (from >= range.from && from <= range.to) || (to >= range.from && to <= range.to)) {
+        if (from <= range.to && range.from <= to) {
             return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         } else {
             return new Range[]{new Range(from, to), new Range(range.from, range.to)};
@@ -57,24 +56,21 @@ public class Range {
     public Range[] getDifference(Range range) {
         if (!this.isIntersection(range)) {
             return new Range[]{new Range(from, to)};
-        } else {
-            if (from >= range.from && to <= range.to) {
-                return new Range[0];
-            } else if (from < range.from && to > range.to) {
-                return new Range[]{new Range(from, range.from), new Range(range.to, to)};
-            } else if (from < range.from && to <= range.to) {
-                return new Range[]{new Range(from, range.from)};
-            } else {
-                return new Range[]{new Range(range.to, to)};
-            }
-
         }
+        if (from >= range.from && to <= range.to) {
+            return new Range[0];
+        } else if (from < range.from && to > range.to) {
+            return new Range[]{new Range(from, range.from), new Range(range.to, to)};
+        } else if (from < range.from && to <= range.to) {
+            return new Range[]{new Range(from, range.from)};
+        } else {
+            return new Range[]{new Range(range.to, to)};
+        }
+
     }
 
     private boolean isIntersection(Range range) {
-        return ((range.to >= from && range.to <= to) || (range.from >= from && range.from <= to) ||
-                (from >= range.from && from <= range.to) || (to >= range.from && to <= range.to)) &&
-                (!(from == range.to) && !(to == range.from));
+        return from < range.to && range.from < to;
     }
 
     public static void print(Range range) {
