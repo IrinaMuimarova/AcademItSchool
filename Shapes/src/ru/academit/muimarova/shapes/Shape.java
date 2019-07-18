@@ -5,8 +5,8 @@ public interface Shape {
 
     double getHeight();
 
-    double getArea();
+    double areaCalculator();
 
-    double getPerimeter();
+    double perimeterCalculator();
 }
 

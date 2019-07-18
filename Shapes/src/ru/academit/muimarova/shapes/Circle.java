@@ -7,6 +7,14 @@ public class Circle implements Shape {
         this.radius = radius;
     }
 
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
     @Override
     public double getWidth() {
         return radius * 2;
@@ -18,21 +26,13 @@ public class Circle implements Shape {
     }
 
     @Override
-    public double getArea() {
+    public double areaCalculator() {
         return Math.PI * Math.pow(radius, 2);
     }
 
     @Override
-    public double getPerimeter() {
+    public double perimeterCalculator() {
         return 2 * Math.PI * radius;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
     }
 
     @Override

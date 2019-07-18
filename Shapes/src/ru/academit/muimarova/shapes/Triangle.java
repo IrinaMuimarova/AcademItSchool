@@ -17,38 +17,6 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
-    @Override
-    public double getWidth() {
-        double max = Math.max(x1, x2);
-        max = Math.max(x3, max);
-        double min = Math.min(x1, x2);
-        min = Math.min(x3, min);
-        return max - min;
-    }
-
-    @Override
-    public double getHeight() {
-        double max = Math.max(y1, y2);
-        max = Math.max(y3, max);
-        double min = Math.min(y1, y2);
-        min = Math.min(y3, min);
-        return max - min;
-    }
-
-    @Override
-    public double getArea() {
-        return Math.abs(0.5 * ((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)));
-    }
-
-    @Override
-    public double getPerimeter() {
-        return getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x3, y3, x1, y1);
-    }
-
-    private double getSide(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-    }
-
     public double getX1() {
         return x1;
     }
@@ -95,6 +63,38 @@ public class Triangle implements Shape {
 
     public void setY3(double y3) {
         this.y3 = y3;
+    }
+
+    @Override
+    public double getWidth() {
+        double max = Math.max(x1, x2);
+        max = Math.max(x3, max);
+        double min = Math.min(x1, x2);
+        min = Math.min(x3, min);
+        return max - min;
+    }
+
+    @Override
+    public double getHeight() {
+        double max = Math.max(y1, y2);
+        max = Math.max(y3, max);
+        double min = Math.min(y1, y2);
+        min = Math.min(y3, min);
+        return max - min;
+    }
+
+    @Override
+    public double areaCalculator() {
+        return Math.abs(0.5 * ((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)));
+    }
+
+    @Override
+    public double perimeterCalculator() {
+        return getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x3, y3, x1, y1);
+    }
+
+    private static double getSide(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
     @Override

@@ -51,12 +51,12 @@ public class Square implements Shape {
     }
 
     @Override
-    public double getArea() {
+    public double areaCalculator() {
         return sideLength * sideLength;
     }
 
     @Override
-    public double getPerimeter() {
+    public double perimeterCalculator() {
         return 4 * sideLength;
     }
 }
