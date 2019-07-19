@@ -133,20 +133,20 @@ class VectorTest {
     void testEquals(){
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4});
-        Assert.assertTrue(vector.equals(vector1));
+        Assert.assertEquals(vector, vector1);
     }
 
     @Test
     void testEquals1(){
         Vector vector = new Vector(new double[]{1, 2, 3, 4, 5});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4});
-        Assert.assertFalse(vector.equals(vector1));
+        Assert.assertNotEquals(vector, vector1);
     }
 
     @Test
     void testEquals2(){
         Vector vector = new Vector(new double[]{1, 5, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4});
-        Assert.assertFalse(vector.equals(vector1));
+        Assert.assertNotEquals(vector, vector1);
     }
 }

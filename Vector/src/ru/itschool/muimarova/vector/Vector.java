@@ -1,7 +1,6 @@
 package ru.itschool.muimarova.vector;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Vector {
     private double[] array;
@@ -25,9 +24,7 @@ public class Vector {
 
     public Vector(int n, double[] array) {
         Vector vector = new Vector(n);
-        for (int i = 0; i < array.length; i++) {
-            vector.array[i] = array[i];
-        }
+        System.arraycopy(array, 0, vector.array, 0, array.length);
         this.array = vector.array;
     }
 
