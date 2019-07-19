@@ -23,6 +23,9 @@ public class Vector {
     }
 
     public Vector(int n, double[] array) {
+        if (n <= array.length) {
+            throw new IllegalArgumentException();
+        }
         Vector vector = new Vector(n);
         System.arraycopy(array, 0, vector.array, 0, array.length);
         this.array = vector.array;

@@ -1,8 +1,9 @@
 package ru.itschool.muimarova.vector;
 
+import org.junit.jupiter.api.*;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static ru.itschool.muimarova.vector.Vector.*;
 
 class VectorTest {
@@ -148,5 +149,15 @@ class VectorTest {
         Vector vector = new Vector(new double[]{1, 5, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4});
         Assert.assertNotEquals(vector, vector1);
+    }
+
+    @Test
+    void testException(){
+        assertThrows(IllegalArgumentException.class, () -> new Vector(-1));
+    }
+
+    @Test
+    void testException1(){
+        assertThrows(IllegalArgumentException.class, () -> new Vector(1, new double[]{1, 2}));
     }
 }
