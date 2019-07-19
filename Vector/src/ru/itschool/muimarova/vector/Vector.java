@@ -127,11 +127,20 @@ public class Vector {
         return this;
     }
 
-    public void setComponent(int index, double value){
+    public void setComponent(int index, double value) {
         array[index] = value;
     }
 
-    public boolean equals(Vector vector) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Vector vector = (Vector) obj;
         if (this.getSize() != vector.getSize()){
             return false;
         }
