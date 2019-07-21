@@ -84,12 +84,12 @@ public class Triangle implements Shape {
     }
 
     @Override
-    public double areaCalculator() {
+    public double getArea() {
         return Math.abs(0.5 * ((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)));
     }
 
     @Override
-    public double perimeterCalculator() {
+    public double getPerimeter() {
         return getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x3, y3, x1, y1);
     }
 

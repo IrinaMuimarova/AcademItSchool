@@ -28,12 +28,12 @@ public class Rectangle implements Shape {
     }
 
     @Override
-    public double areaCalculator() {
+    public double getArea() {
         return width * height;
     }
 
     @Override
-    public double perimeterCalculator() {
+    public double getPerimeter() {
         return 2 * (width + height);
     }
 

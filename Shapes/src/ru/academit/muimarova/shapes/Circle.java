@@ -26,12 +26,12 @@ public class Circle implements Shape {
     }
 
     @Override
-    public double areaCalculator() {
+    public double getArea() {
         return Math.PI * Math.pow(radius, 2);
     }
 
     @Override
-    public double perimeterCalculator() {
+    public double getPerimeter() {
         return 2 * Math.PI * radius;
     }
 
