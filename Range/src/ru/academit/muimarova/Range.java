@@ -66,7 +66,6 @@ public class Range {
         } else {
             return new Range[]{new Range(range.to, to)};
         }
-
     }
 
     private boolean isIntersection(Range range) {
