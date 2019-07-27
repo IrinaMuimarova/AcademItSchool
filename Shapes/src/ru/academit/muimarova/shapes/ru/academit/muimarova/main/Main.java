@@ -27,20 +27,20 @@ public class Main {
         Circle circle1 = new Circle(8.6);
         System.out.println(circle1.getArea() + "; " + circle1.getPerimeter());
 
-        Shape shape = searchMaxArea(square, square1, triangle, triangle1, rectangle, rectangle1, circle, circle1);
+        Shape shape = searchShapeWithMaxArea(square, square1, triangle, triangle1, rectangle, rectangle1, circle, circle1);
         System.out.println(shape.toString());
 
-        Shape shape1 = searchSecondMaxPerimeter(square, square1, triangle, triangle1, rectangle, rectangle1, circle, circle1);
+        Shape shape1 = searchShapeWithSecondMaxPerimeter(square, square1, triangle, triangle1, rectangle, rectangle1, circle, circle1);
         System.out.println(shape1.toString());
     }
 
-    private static Shape searchMaxArea(Shape ... shapes){
+    private static Shape searchShapeWithMaxArea(Shape ... shapes){
         AreaComparator myAreaComparator = new AreaComparator();
         Arrays.sort(shapes, myAreaComparator);
         return shapes[0];
     }
 
-    private static Shape searchSecondMaxPerimeter(Shape ... shapes){
+    private static Shape searchShapeWithSecondMaxPerimeter(Shape ... shapes){
         PerimeterComparator myPerimeterComparator = new PerimeterComparator();
         Arrays.sort(shapes, myPerimeterComparator);
         return shapes[1];
