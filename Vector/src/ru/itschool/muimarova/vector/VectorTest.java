@@ -50,14 +50,16 @@ class VectorTest {
     void testAddVector() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4, 5, 6});
-        Assert.assertEquals(vector.add(vector1).toString(), "{2.0, 4.0, 6.0, 8.0, 5.0, 6.0}");
+        vector.add(vector1);
+        Assert.assertEquals(vector.toString(), "{2.0, 4.0, 6.0, 8.0, 5.0, 6.0}");
     }
 
     @Test
     void testAddVector1() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3});
-        Assert.assertEquals(vector.add(vector1).toString(), "{2.0, 4.0, 6.0, 4.0}");
+        vector.add(vector1);
+        Assert.assertEquals(vector.toString(), "{2.0, 4.0, 6.0, 4.0}");
     }
 
     @Test
@@ -78,14 +80,16 @@ class VectorTest {
     void testSubtractionVector() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3, 4, 5, 6});
-        Assert.assertEquals(vector.subtraction(vector1).toString(), "{0.0, 0.0, 0.0, 0.0, -5.0, -6.0}");
+        vector.subtraction(vector1);
+        Assert.assertEquals(vector.toString(), "{0.0, 0.0, 0.0, 0.0, -5.0, -6.0}");
     }
 
     @Test
     void testSubtractionVector1() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
         Vector vector1 = new Vector(new double[]{1, 2, 3});
-        Assert.assertEquals(vector.subtraction(vector1).toString(), "{0.0, 0.0, 0.0, 4.0}");
+        vector.subtraction(vector1);
+        Assert.assertEquals(vector.toString(), "{0.0, 0.0, 0.0, 4.0}");
     }
 
     @Test

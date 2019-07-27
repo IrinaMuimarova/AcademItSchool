@@ -11,11 +11,15 @@ public class Main {
 
         System.out.println(vector.getSize());
         vector.setComponent(3,6);
-        System.out.println(vector.add(vector1).toString());
-        System.out.println(vector.reversal().toString());
+        vector.add(vector1);
+        System.out.println(vector.toString());
+        vector.reversal();
+        System.out.println(vector.toString());
         System.out.println(vector.equals(vector3));
-        System.out.println(vector.MultiplicationByScalar(5).toString());
-        System.out.println(vector.subtraction(vector2).toString());
+        vector.MultiplicationByScalar(5);
+        System.out.println(vector.toString());
+        vector.subtraction(vector2);
+        System.out.println(vector.toString());
         Vector vector4 = Vector.add(vector1,vector2);
         System.out.println(vector4.toString());
         System.out.println(Vector.scalarMultiplication(vector3, vector4));

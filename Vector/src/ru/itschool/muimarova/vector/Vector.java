@@ -50,14 +50,13 @@ public class Vector {
         return arrayOfVectorComponents.length;
     }
 
-    public Vector add(Vector vector) {
+    public void add(Vector vector) {
         if (this.getSize() < vector.getSize()) {
             this.arrayOfVectorComponents = Arrays.copyOf(this.arrayOfVectorComponents, vector.getSize());
         }
         for (int i = 0; i < vector.getSize(); i++) {
             this.arrayOfVectorComponents[i] += vector.arrayOfVectorComponents[i];
         }
-        return this;
     }
 
     public static Vector add(Vector vector1, Vector vector2) {
@@ -78,7 +77,7 @@ public class Vector {
         return vector;
     }
 
-    public Vector subtraction(Vector vector) {
+    public void subtraction(Vector vector) {
         if (this.getSize() < vector.getSize()) {
             this.arrayOfVectorComponents = Arrays.copyOf(arrayOfVectorComponents, vector.getSize());
         }
@@ -86,8 +85,6 @@ public class Vector {
         for (int i = 0; i < vector.getSize(); i++) {
             this.arrayOfVectorComponents[i] -= vector.arrayOfVectorComponents[i];
         }
-
-        return this;
     }
 
     public static Vector subtraction(Vector vector1, Vector vector2) {
@@ -108,12 +105,10 @@ public class Vector {
         return vector;
     }
 
-    public Vector MultiplicationByScalar(double n) {
+    public void MultiplicationByScalar(double n) {
         for (int i = 0; i < arrayOfVectorComponents.length; i++) {
             arrayOfVectorComponents[i] *= n;
         }
-
-        return this;
     }
 
     public static double scalarMultiplication(Vector vector, Vector vector1) {
@@ -134,9 +129,8 @@ public class Vector {
         return scalarMultiplication;
     }
 
-    public Vector reversal() {
+    public void reversal() {
         this.MultiplicationByScalar(-1);
-        return this;
     }
 
     public void setComponent(int index, double value) {
