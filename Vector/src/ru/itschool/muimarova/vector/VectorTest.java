@@ -123,7 +123,7 @@ class VectorTest {
     @Test
     void testScalarMulti() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
-        vector.MultiplicationByScalar(2);
+        vector.multiplicationByScalar(2);
         Assert.assertEquals(vector.toString(), "{2.0, 4.0, 6.0, 8.0}");
     }
 
@@ -175,6 +175,6 @@ class VectorTest {
     @Test
     void testGetComponent() {
         Vector vector = new Vector(new double[]{3, 6, 5, 4});
-        Assert.assertEquals(vector.getArrayOfVectorComponents(3), 5, 3);
+        Assert.assertEquals(vector.getComponents(3), 5, 3);
     }
 }

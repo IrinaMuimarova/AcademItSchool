@@ -16,12 +16,14 @@ public class Main {
         vector.reversal();
         System.out.println(vector.toString());
         System.out.println(vector.equals(vector3));
-        vector.MultiplicationByScalar(5);
+        vector.multiplicationByScalar(5);
         System.out.println(vector.toString());
         vector.subtraction(vector2);
         System.out.println(vector.toString());
         Vector vector4 = Vector.add(vector1,vector2);
         System.out.println(vector4.toString());
         System.out.println(Vector.scalarMultiplication(vector3, vector4));
+        System.out.println(vector.getComponents(3));
+        System.out.println(Vector.subtraction(vector1,vector2));
     }
 }
