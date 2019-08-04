@@ -96,15 +96,16 @@ public class Vector {
 
     public static double scalarMultiplication(Vector vector, Vector vector1) {
         double scalarMultiplication = 0;
+        int minSize = Math.min(vector1.getSize(), vector.getSize());
 
-        for (int i = 0; i < (vector.getSize() < vector1.getSize() ? vector.getSize() : vector1.getSize()); i++) {
+        for (int i = 0; i < minSize; i++) {
             scalarMultiplication += vector.components[i] * vector1.components[i];
         }
 
         return scalarMultiplication;
     }
 
-    public void reversal() {
+    public void invert() {
         this.multiplicationByScalar(-1);
     }
 

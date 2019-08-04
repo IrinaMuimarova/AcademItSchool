@@ -13,7 +13,7 @@ public class Main {
         vector.setComponent(3,6);
         vector.add(vector1);
         System.out.println(vector.toString());
-        vector.reversal();
+        vector.invert();
         System.out.println(vector.toString());
         System.out.println(vector.equals(vector3));
         vector.multiplicationByScalar(5);

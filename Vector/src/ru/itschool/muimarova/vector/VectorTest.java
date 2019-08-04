@@ -130,7 +130,7 @@ class VectorTest {
     @Test
     void testReversal() {
         Vector vector = new Vector(new double[]{1, 2, 3, 4});
-        vector.reversal();
+        vector.invert();
         Assert.assertEquals(vector.toString(), "{-1.0, -2.0, -3.0, -4.0}");
     }
 
