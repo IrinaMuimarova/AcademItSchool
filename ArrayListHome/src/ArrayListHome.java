@@ -5,20 +5,23 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayListHome {
-    public static ArrayList<String> readOfFile(String filename) throws IOException {
-        try (FileReader reader = new FileReader(filename)) {
-            Scanner scanner = new Scanner(reader);
+    public static ArrayList<String> readFile(String filename) throws IOException {
+        try (Scanner scanner = new Scanner(new FileReader(filename))) {
             ArrayList<String> list = new ArrayList<>();
+
             while (scanner.hasNext()) {
                 list.add(scanner.nextLine());
             }
+
             return list;
         } catch (IOException e) {
-            throw new IOException(e);
+            System.out.println("Ошибка чтения файла. " + e);
         }
+
+        return null;
     }
 
-    public static void removeEvenNumber(ArrayList<Integer> list) {
+    public static void removeEvenNumbers(ArrayList<Integer> list) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) % 2 == 0) {
                 list.remove(i);
@@ -27,10 +30,9 @@ public class ArrayListHome {
         }
     }
 
-    public static ArrayList<Integer> removeReplayNumber(ArrayList<Integer> list) {
+    public static ArrayList<Integer> removeDuplicateNumbers(ArrayList<Integer> list) {
         ArrayList<Integer> listOut = new ArrayList<>();
-        for (Integer number :
-                list) {
+        for (Integer number : list) {
             if (!listOut.contains(number)) {
                 listOut.add(number);
             }
@@ -39,7 +41,7 @@ public class ArrayListHome {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(readOfFile("C:\\test\\out.txt"));
+        System.out.println(readFile("C:\\test\\out.txt"));
 
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
@@ -47,13 +49,12 @@ public class ArrayListHome {
         }
 
         System.out.println(list);
-        removeEvenNumber(list);
+        removeEvenNumbers(list);
         System.out.println(list);
 
         ArrayList<Integer> list1 = new ArrayList<>(Arrays.asList(1, 2, 4, 6, 2, 1, 6, 9));
 
-        System.out.println(removeReplayNumber(list1));
-
+        System.out.println(removeDuplicateNumbers(list1));
     }
 }
 
