@@ -5,42 +5,44 @@ import ru.itschool.muimarova.vector.Vector;
 import java.util.Arrays;
 
 public class Matrix {
-    private Vector[] vectors;
+    private Vector[] rows;
 
-    public Matrix(int n, int m) {
-        if (n <= 0) {
+    public Matrix(int countRow, int countColumn) {
+        if (countRow <= 0) {
             throw new IllegalArgumentException("Количество строк в матрице не может быть меньше или равно 0");
         }
-
-        vectors = new Vector[n];
-        for (int i = 0; i < vectors.length; i++) {
-            vectors[i] = new Vector(m);
+        rows = new Vector[countRow];
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = new Vector(countColumn);
         }
 
     }
 
     public Matrix(Matrix matrix) {
-        this.vectors = new Vector[matrix.vectors.length];
-        for (int i = 0; i < this.vectors.length; i++) {
-            this.vectors[i] = new Vector(matrix.vectors[i]);
+        this.rows = new Vector[matrix.rows.length];
+        for (int i = 0; i < this.rows.length; i++) {
+            this.rows[i] = new Vector(matrix.rows[i]);
         }
     }
 
     public Matrix(double[][] matrix) {
-        this.vectors = new Vector[matrix.length];
+        if (matrix.length <= 0 || matrix[0].length <= 0){
+
+        }
+        this.rows = new Vector[matrix.length];
         int lengthString = matrix[0].length;
         for (int i = 1; i < matrix.length; i++) {
             if (matrix[i].length > lengthString) {
                 lengthString = matrix[i].length;
             }
         }
-        for (int i = 0; i < this.vectors.length; i++) {
-            this.vectors[i] = new Vector(Arrays.copyOf(matrix[i], lengthString));
+        for (int i = 0; i < this.rows.length; i++) {
+            this.rows[i] = new Vector(Arrays.copyOf(matrix[i], lengthString));
         }
     }
 
     public Matrix(Vector[] matrix) {
-        this.vectors = new Vector[matrix.length];
+        this.rows = new Vector[matrix.length];
         int lengthString = matrix[0].getSize();
         for (int i = 1; i < matrix.length; i++) {
             if (matrix[i].getSize() > lengthString) {
@@ -48,48 +50,48 @@ public class Matrix {
             }
         }
 
-        for (int i = 0; i < vectors.length; i++) {
-            this.vectors[i] = new Vector(lengthString);
-            this.vectors[i].add(matrix[i]);
+        for (int i = 0; i < rows.length; i++) {
+            this.rows[i] = new Vector(lengthString);
+            this.rows[i].add(matrix[i]);
         }
     }
 
     public int[] getSize() {
-        return new int[]{this.vectors.length, this.vectors[0].getSize()};
+        return new int[]{this.rows.length, this.rows[0].getSize()};
     }
 
-    public Vector getVectorString(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Количество строк в матрице не может быть меньше или равно 0");
+    public Vector getVectorString(int indexRow) {
+        if (indexRow < 0) {
+            throw new IllegalArgumentException("Номер строки в матрице не может быть меньше или равно 0");
         }
-        if (n > this.getSize()[0]) {
+        if (indexRow > this.getSize()[0]) {
             throw new IllegalArgumentException("Строки не существует.");
         }
-        return this.vectors[n];
+        return this.rows[indexRow];
     }
 
-    public void setVectorString(int n, Vector vector) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Количество строк в матрице не может быть меньше или равно 0");
+    public void setVectorString(int indexRow, Vector vector) {
+        if (indexRow < 0) {
+            throw new IllegalArgumentException("Номер строки в матрице не может быть меньше или равно 0");
         }
-        if (n > this.getSize()[0]) {
+        if (indexRow > this.getSize()[0]) {
             throw new IllegalArgumentException("Строки не существует.");
         }
-        this.vectors[n] = vector;
+        this.rows[indexRow] = vector;
     }
 
-    public Vector getColumn(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Количество столбцов в матрице не может быть меньше 0");
+    public Vector getColumn(int indexColumn) {
+        if (indexColumn < 0) {
+            throw new IllegalArgumentException("Номер столбца в матрице не может быть меньше 0");
         }
-        if (n > this.getSize()[1]) {
+        if (indexColumn > this.getSize()[1]) {
             throw new IllegalArgumentException("Столбца не существует.");
         }
-        double[] components = new double[this.getSize()[0]];
+        double[] component = new double[this.getSize()[0]];
         for (int i = 0; i < this.getSize()[0]; i++) {
-            components[i] = this.vectors[i].getComponents(n);
+            component[i] = this.rows[i].getComponents(indexColumn);
         }
-        return new Vector(components);
+        return new Vector(component);
     }
 
     public void transpose() {
@@ -97,7 +99,7 @@ public class Matrix {
         for (int i = 0; i < this.getSize()[1]; i++) {
             matrix.setVectorString(i, this.getColumn(i));
         }
-        this.vectors = matrix.vectors;
+        this.rows = matrix.rows;
     }
 
     public void multiplicationByScalar(double n) {
@@ -113,7 +115,7 @@ public class Matrix {
 
         double calculateDeterminant = 0;
         if (this.getSize()[0] == 2) {
-            return vectors[0].getComponents(0) * vectors[1].getComponents(1) - vectors[1].getComponents(0) * vectors[0].getComponents(1);
+            return rows[0].getComponents(0) * rows[1].getComponents(1) - rows[1].getComponents(0) * rows[0].getComponents(1);
         }
 
         int factor;
@@ -124,13 +126,13 @@ public class Matrix {
                 factor = 1;
             }
             Matrix minor = getMinor(this, 0, i);
-            calculateDeterminant += factor * vectors[0].getComponents(i) * minor.calculateDeterminant();
+            calculateDeterminant += factor * rows[0].getComponents(i) * minor.calculateDeterminant();
         }
         return calculateDeterminant;
     }
 
     private Matrix getMinor(Matrix matrix, int row, int column) {
-        int minorLength = matrix.vectors.length - 1;
+        int minorLength = matrix.rows.length - 1;
         Matrix minor = new Matrix(minorLength, minorLength);
         int dI = 0;
 
@@ -143,7 +145,7 @@ public class Matrix {
                     if (j == column) {
                         dJ = 1;
                     } else {
-                        minor.vectors[i - dI].setComponent(j - dJ, matrix.vectors[i].getComponents(j));
+                        minor.rows[i - dI].setComponent(j - dJ, matrix.rows[i].getComponents(j));
                     }
                 }
             }
@@ -169,7 +171,7 @@ public class Matrix {
         }
 
         for (int i = 0; i < getSize()[0]; i++) {
-            vectors[i].add(matrix.vectors[i]);
+            rows[i].add(matrix.rows[i]);
         }
     }
 
@@ -185,7 +187,7 @@ public class Matrix {
         }
 
         for (int i = 0; i < getSize()[0]; i++) {
-            vectors[i].subtraction(matrix.vectors[i]);
+            rows[i].subtraction(matrix.rows[i]);
         }
     }
 
@@ -219,12 +221,12 @@ public class Matrix {
 
     @Override
     public String toString() {
-        int iMax = vectors.length - 1;
+        int iMax = rows.length - 1;
 
         StringBuilder b = new StringBuilder();
         b.append('{');
         for (int i = 0; ; i++) {
-            b.append(vectors[i]);
+            b.append(rows[i]);
             if (i == iMax) {
                 return b.append('}').toString();
             }

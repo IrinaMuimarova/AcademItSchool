@@ -1,21 +1,23 @@
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayListHome {
-    public static ArrayList<String> readFile(String filename) throws IOException {
+    public static ArrayList<String> readFile(String filename) {
         try (Scanner scanner = new Scanner(new FileReader(filename))) {
             ArrayList<String> list = new ArrayList<>();
 
-            while (scanner.hasNext()) {
+            while (scanner.hasNextLine()) {
                 list.add(scanner.nextLine());
             }
 
             return list;
-        } catch (IOException e) {
-            System.out.println("Ошибка чтения файла. " + e);
+        } catch (FileNotFoundException e){
+            System.out.println("Файл не найден" + e);
+        } catch (Exception e) {
+            System.out.println("Неизвестная ошибка. " + e);
         }
 
         return null;
@@ -40,8 +42,8 @@ public class ArrayListHome {
         return listOut;
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println(readFile("C:\\test\\out.txt"));
+    public static void main(String[] args) {
+        System.out.println(readFile("C:\\test\\out1.png"));
 
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
