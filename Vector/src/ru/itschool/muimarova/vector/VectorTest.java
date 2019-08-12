@@ -175,6 +175,6 @@ class VectorTest {
     @Test
     void testGetComponent() {
         Vector vector = new Vector(new double[]{3, 6, 5, 4});
-        Assert.assertEquals(vector.getComponents(3), 5, 3);
+        Assert.assertEquals(vector.getComponent(3), 5, 3);
     }
 }

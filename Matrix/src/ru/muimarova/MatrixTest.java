@@ -4,8 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.itschool.muimarova.vector.Vector;
 
-import java.util.Arrays;
-
 import static org.testng.Assert.assertThrows;
 
 public class MatrixTest {
@@ -30,7 +28,7 @@ public class MatrixTest {
     void testConstructorCopy() {
         Matrix matrix = new Matrix(new double[][]{{1, 2}, {2, 3}});
         Matrix matrix1 = new Matrix(matrix);
-        Assert.assertEquals(matrix.toString(), "{{1.0, 2.0}, {2.0, 3.0}}");
+        Assert.assertEquals(matrix1.toString(), "{{1.0, 2.0}, {2.0, 3.0}}");
     }
 
     @Test
@@ -54,24 +52,25 @@ public class MatrixTest {
     @Test
     void testGetSizeMatrix(){
         Matrix matrix = new Matrix(new Vector[]{new Vector(new double[]{1, 2, 7}), new Vector(new double[]{2, 3, 5}), new Vector(new double[]{2, 3, 6})});
-        Assert.assertEquals(Arrays.toString(matrix.getSize()), "[3, 3]");
+        Assert.assertEquals((matrix.getSizeRows()), 3);
+        Assert.assertEquals((matrix.getSizeColumn()), 3);
     }
 
     @Test
     void testGetVector(){
         Matrix matrix = new Matrix(new Vector[]{new Vector(new double[]{1, 2, 7}), new Vector(new double[]{2, 3, 5}), new Vector(new double[]{2, 3, 6})});
-        Assert.assertEquals(matrix.getVectorString(1).toString(), "{2.0, 3.0, 5.0}");
+        Assert.assertEquals(matrix.getRow(1).toString(), "{2.0, 3.0, 5.0}");
     }
 
     @Test
     void testSetVector(){
         Matrix matrix = new Matrix(new Vector[]{new Vector(new double[]{1, 2, 7}), new Vector(new double[]{2, 3, 5}), new Vector(new double[]{2, 3, 6})});
-        matrix.setVectorString(1, new Vector(new double[]{1, 2, 3}));
-        Assert.assertEquals(matrix.getVectorString(1).toString(), "{1.0, 2.0, 3.0}");
+        matrix.setRow(1, new Vector(new double[]{1, 2, 3}));
+        Assert.assertEquals(matrix.getRow(1).toString(), "{1.0, 2.0, 3.0}");
     }
 
     @Test
-    void testGetColomn(){
+    void testGetColumn(){
         Matrix matrix = new Matrix(new Vector[]{new Vector(new double[]{1, 2, 7}), new Vector(new double[]{2, 3, 5}),
                 new Vector(new double[]{2, 3})});
         Assert.assertEquals(matrix.getColumn(2).toString(), "{7.0, 5.0, 0.0}");

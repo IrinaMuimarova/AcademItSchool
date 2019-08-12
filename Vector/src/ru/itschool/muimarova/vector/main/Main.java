@@ -23,7 +23,7 @@ public class Main {
         Vector vector4 = Vector.add(vector1,vector2);
         System.out.println(vector4.toString());
         System.out.println(Vector.scalarMultiplication(vector3, vector4));
-        System.out.println(vector.getComponents(3));
+        System.out.println(vector.getComponent(3));
         System.out.println(Vector.subtraction(vector1,vector2));
     }
 }

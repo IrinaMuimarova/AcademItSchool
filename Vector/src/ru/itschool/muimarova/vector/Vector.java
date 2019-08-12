@@ -30,7 +30,7 @@ public class Vector {
         this.components = Arrays.copyOf(array, n);
     }
 
-    public double getComponents(int index) {
+    public double getComponent(int index) {
         return components[index];
     }
 
