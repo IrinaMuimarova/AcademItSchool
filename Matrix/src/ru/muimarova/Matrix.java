@@ -5,8 +5,8 @@ import ru.itschool.muimarova.vector.Vector;
 import java.util.Arrays;
 
 public class Matrix {
-    private static final String ILLEGAL_COUNT_ROW= "Количество строк в матрице не может быть меньше или равно 0";
-    private static final String ILLEGAL_COUNT_COLUMN= "Количество стоблцов в матрице не может быть меньше или равно 0";
+    private static final String ILLEGAL_COUNT_ROW = "Количество строк в матрице не может быть меньше или равно 0";
+    private static final String ILLEGAL_COUNT_COLUMN = "Количество стоблцов в матрице не может быть меньше или равно 0";
 
     private Vector[] rows;
 
@@ -96,7 +96,7 @@ public class Matrix {
         if (indexRow >= this.getSizeColumn()) {
             throw new IndexOutOfBoundsException("Строки не существует.");
         }
-        if (vector.getSize() != this.getSizeColumn()){
+        if (vector.getSize() != this.getSizeColumn()) {
             throw new IllegalArgumentException("Размер строки не совпадает с размеров матрицы.");
         }
 
@@ -121,14 +121,14 @@ public class Matrix {
     }
 
     public void transpose() {
-//        Matrix matrix = new Matrix(this.getSizeColumn(), this.getSizeRows());
-//        for (int i = 0; i < this.getSizeColumn(); i++) {
-//            matrix.setRow(i, this.getColumn(i));
-//        }
-//        this.rows = matrix.rows;
-        for (int i = 0; i < getSizeColumn(); i++) {
-            setRow(i, getColumn(i));
+        Vector[] matrix = new Vector[this.getSizeColumn()];
+        for (int i = 0; i < this.getSizeColumn(); i++) {
+            matrix[i] = new Vector(this.getSizeRows());
+            for (int j = 0; j < this.getSizeRows(); j++) {
+                matrix[i].setComponent(j, getColumn(i).getComponent(j));
+            }
         }
+        this.rows = matrix;
     }
 
     public void multiplicationByScalar(double n) {

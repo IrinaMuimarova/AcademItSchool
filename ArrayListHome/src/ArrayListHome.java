@@ -14,7 +14,7 @@ public class ArrayListHome {
             }
 
             return list;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Файл не найден" + e);
         } catch (Exception e) {
             System.out.println("Неизвестная ошибка. " + e);
