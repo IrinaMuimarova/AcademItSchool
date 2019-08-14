@@ -1,3 +1,5 @@
+package ru.mujmarova;
+
 public class SinglyLinkedList<T> {
     private ListItem<T> head;
     private int size = 0;
@@ -83,9 +85,9 @@ public class SinglyLinkedList<T> {
         return "Index: " + index + ", Size: " + size;
     }
 
-    public ListItem<T> remove(int index) {
+    public T remove(int index) {
         checkElementIndex(index);
-        ListItem<T> itemRemove = getItem(index);
+        T itemRemove = getItem(index).getData();
         if (index == size - 1) {
             getItem(index - 1).setNext(null);
         } else if (index == 0) {
@@ -119,19 +121,19 @@ public class SinglyLinkedList<T> {
 
     @Override
     public String toString() {
-        String str = "[";
+        StringBuilder str = new StringBuilder("[");
         for (ListItem<T> p = head; p != null; p = p.getNext()) {
             if (p.getNext() == null) {
-                str += p.getData();
+                str.append(p.getData());
             } else {
-                str += p.getData() + ", ";
+                str.append(p.getData()).append(", ");
             }
         }
-        str += "]";
-        return str;
+        str.append("]");
+        return str.toString();
     }
 
-    public SinglyLinkedList<T> clone() {
+    public SinglyLinkedList<T> copy() {
         SinglyLinkedList<T> clone = new SinglyLinkedList<>();
         for (ListItem<T> p = head; p != null; p = p.getNext()) {
             ListItem<T> temp = new ListItem<>(p.getData());

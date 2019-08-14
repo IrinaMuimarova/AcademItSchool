@@ -1,5 +1,8 @@
+package ru.mujmarova.test;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.mujmarova.ListItem;
 
 public class ListItemTest {
 
@@ -20,14 +23,14 @@ public class ListItemTest {
     @Test
     public void getData() {
         ListItem<String> str = new ListItem<>("la-la-la");
-        Assert.assertEquals((String) str.getData(), "la-la-la");
+        Assert.assertEquals(str.getData(), "la-la-la");
     }
 
     @Test
     public void setData() {
         ListItem<String> str = new ListItem<>("la-la-la");
         str.setData("na-na-na");
-        Assert.assertEquals((String) str.getData(), "na-na-na");
+        Assert.assertEquals(str.getData(), "na-na-na");
     }
 
     @Test

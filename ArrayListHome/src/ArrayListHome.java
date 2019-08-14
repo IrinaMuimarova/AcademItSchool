@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayListHome {
-    public static ArrayList<String> readFile(String filename) {
+    private static ArrayList<String> readFile(String filename) {
         try (Scanner scanner = new Scanner(new FileReader(filename))) {
             ArrayList<String> list = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class ArrayListHome {
         return null;
     }
 
-    public static void removeEvenNumbers(ArrayList<Integer> list) {
+    private static void removeEvenNumbers(ArrayList<Integer> list) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) % 2 == 0) {
                 list.remove(i);
@@ -32,7 +32,7 @@ public class ArrayListHome {
         }
     }
 
-    public static ArrayList<Integer> removeDuplicateNumbers(ArrayList<Integer> list) {
+    private static ArrayList<Integer> removeDuplicateNumbers(ArrayList<Integer> list) {
         ArrayList<Integer> listOut = new ArrayList<>();
         for (Integer number : list) {
             if (!listOut.contains(number)) {
@@ -43,7 +43,7 @@ public class ArrayListHome {
     }
 
     public static void main(String[] args) {
-        System.out.println(readFile("C:\\test\\out1.png"));
+        System.out.println(readFile("C:\\ru.mujmarova.test\\out1.png"));
 
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
