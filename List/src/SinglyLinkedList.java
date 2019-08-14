@@ -141,22 +141,27 @@ public class SinglyLinkedList<T> {
     }
 
     public void spread() {
-        int count = 0;
-        ListItem<T> temp;
-        for (ListItem<T> p = head; p != null; p = p.getNext()) {
-            temp = p;
-            ListItem<T> nextItem = p.getNext();
-            p = p.getNext().getNext();
-            if (count == 1) {
-                temp.setNext(null);
-            }
-            if (p.getNext() == null) {
-                p.setNext(nextItem);
-                head = p;
-            }
-            nextItem.setNext(temp);
-            count++;
+        if (size == 0 || size == 1) {
+            return;
         }
 
+        ListItem<T> firstItem = head;
+        ListItem<T> secondItem = firstItem.getNext();
+        ListItem<T> thirdItem = secondItem.getNext();
+
+        firstItem.setNext(null);
+        secondItem.setNext(firstItem);
+
+        ListItem<T> current = thirdItem;
+        ListItem<T> previous = secondItem;
+
+        while (current != null) {
+            ListItem<T> nextItem = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = nextItem;
+        }
+
+        head = previous;
     }
 }

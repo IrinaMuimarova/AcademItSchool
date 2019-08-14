@@ -9,6 +9,9 @@ public class SinglyLinkedListTest {
     ListItem<Integer> i3;
     ListItem<Integer> i4;
     ListItem<Integer> i5;
+    ListItem<Integer> i6;
+    ListItem<Integer> i7;
+    ListItem<Integer> i8;
     SinglyLinkedList<Integer> list;
 
     @BeforeTest
@@ -18,17 +21,24 @@ public class SinglyLinkedListTest {
         i3 = new ListItem<>(3);
         i4 = new ListItem<>(4);
         i5 = new ListItem<>(5);
+        i6 = new ListItem<>(6);
+        i7 = new ListItem<>(7);
+        i8 = new ListItem<>(8);
+
         list = new SinglyLinkedList<>();
         list.add(i1);
         list.add(i2);
         list.add(i3);
         list.add(i4);
         list.add(i5);
+        list.add(i6);
+        list.add(i7);
+        list.add(i8);
     }
 
     @Test
     public void getCount() {
-        Assert.assertEquals(list.getCount(), 5);
+        Assert.assertEquals(list.getCount(), 9);
     }
 
     @Test
@@ -38,6 +48,7 @@ public class SinglyLinkedListTest {
 
     @Test
     public void getItem() {
+        initObjects();
         Assert.assertEquals(list.getItem(3), i4);
     }
 
@@ -49,14 +60,15 @@ public class SinglyLinkedListTest {
 
     @Test
     public void remove() {
+        initObjects();
         list.remove(0);
-        Assert.assertEquals(list.getCount(), 4);
+        Assert.assertEquals(list.getCount(), 7);
     }
 
     @Test
     public void addIndex(){
         list.add(3, new ListItem<Integer>(99));
-        Assert.assertEquals(list.toString(), "[1, 2, 3, 99, 4, 5]" );
+        Assert.assertEquals(list.toString(), "[1, 2, 3, 99, 4, 5, 6, 7, 8]" );
     }
 
     @Test
