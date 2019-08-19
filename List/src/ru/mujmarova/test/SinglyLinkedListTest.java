@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import ru.mujmarova.ListItem;
 import ru.mujmarova.SinglyLinkedList;
 
+import java.util.Arrays;
+
 public class SinglyLinkedListTest {
 
     private ListItem<Integer> i4;
@@ -91,6 +93,8 @@ public class SinglyLinkedListTest {
         initObjects();
         SinglyLinkedList<Integer> listClone = list.copy();
         Assert.assertEquals(listClone.toString(), "[1, 2, 3, 4, 5, 6, 7, 8]");
+        int[] array = new int[]{1,2,3,4};
+        System.out.println(Arrays.binarySearch(array, -21));
     }
 
     @Test
