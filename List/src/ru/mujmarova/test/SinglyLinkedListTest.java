@@ -3,36 +3,26 @@ package ru.mujmarova.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import ru.mujmarova.ListItem;
 import ru.mujmarova.SinglyLinkedList;
 
 import java.util.Arrays;
 
 public class SinglyLinkedListTest {
 
-    private ListItem<Integer> i4;
     private SinglyLinkedList<Integer> list;
 
     @BeforeTest
     public void initObjects() {
-        ListItem<Integer> i1 = new ListItem<>(1);
-        ListItem<Integer> i2 = new ListItem<>(2);
-        ListItem<Integer> i3 = new ListItem<>(3);
-        i4 = new ListItem<>(4);
-        ListItem<Integer> i5 = new ListItem<>(5);
-        ListItem<Integer> i6 = new ListItem<>(6);
-        ListItem<Integer> i7 = new ListItem<>(7);
-        ListItem<Integer> i8 = new ListItem<>(8);
 
         list = new SinglyLinkedList<>();
-        list.add(i1);
-        list.add(i2);
-        list.add(i3);
-        list.add(i4);
-        list.add(i5);
-        list.add(i6);
-        list.add(i7);
-        list.add(i8);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        list.add(8);
     }
 
     @Test
@@ -44,20 +34,20 @@ public class SinglyLinkedListTest {
     @Test
     public void getHead() {
         initObjects();
-        Assert.assertEquals((int) list.getHead().getData(), 1);
+        Assert.assertEquals((int) list.getFirstItem(), 1);
     }
 
     @Test
     public void getItem() {
         initObjects();
-        Assert.assertEquals(list.getItem(3), i4);
+        Assert.assertEquals(list.getItemData(3),(Integer) 4);
     }
 
     @Test
     public void setItem() {
         initObjects();
         list.setItem(2, 9);
-        Assert.assertEquals((int) list.getItem(2).getData(), 9);
+        Assert.assertEquals((int) list.getItemData(2), 9);
     }
 
     @Test
@@ -71,21 +61,31 @@ public class SinglyLinkedListTest {
     @Test
     public void addIndex() {
         initObjects();
-        list.add(3, new ListItem<>(99));
+        list.add(3, 99);
         Assert.assertEquals(list.toString(), "[1, 2, 3, 99, 4, 5, 6, 7, 8]");
+
+        list.add(0, 0);
+        Assert.assertEquals(list.toString(), "[0, 1, 2, 3, 99, 4, 5, 6, 7, 8]");
+
+        list.add(10, 10);
+        Assert.assertEquals(list.toString(), "[0, 1, 2, 3, 99, 4, 5, 6, 7, 8, 10]");
     }
 
     @Test
     public void removeObject() {
         initObjects();
+        list.add(null);
         boolean isRemove = list.remove((Integer) 99);
-        Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 7, 8]");
+        Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 7, 8, null]");
         Assert.assertFalse(isRemove);
 
-        isRemove = list.remove((Integer) 7);
-        Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 8]");
+        isRemove = list.remove(null);
+        Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 7, 8]");
         Assert.assertTrue(isRemove);
 
+        isRemove = list.remove((Integer)7);
+        Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 8]");
+        Assert.assertTrue(isRemove);
     }
 
     @Test
@@ -100,7 +100,7 @@ public class SinglyLinkedListTest {
     @Test
     void spreadTest() {
         initObjects();
-        list.spread();
+        list.invert();
         Assert.assertEquals(list.toString(), "[8, 7, 6, 5, 4, 3, 2, 1]");
     }
 
