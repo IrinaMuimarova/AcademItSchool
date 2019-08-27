@@ -21,7 +21,12 @@ public class MatrixTest {
 
     @Test
     void testException1() {
-        assertThrows(IllegalArgumentException.class, () -> new Matrix(1, -1));
+        assertThrows(IllegalArgumentException.class, () -> new Matrix(1, 0));
+    }
+
+    @Test
+    void testException2() {
+        assertThrows(IllegalArgumentException.class, () -> new Matrix(new double[][]{{}, {}, {}}));
     }
 
     @Test
@@ -29,6 +34,7 @@ public class MatrixTest {
         Matrix matrix = new Matrix(new double[][]{{1, 2}, {2, 3}});
         Matrix matrix1 = new Matrix(matrix);
         Assert.assertEquals(matrix1.toString(), "{{1.0, 2.0}, {2.0, 3.0}}");
+        matrix = new Matrix(new double[][]{{}, {}, {}});
     }
 
     @Test
@@ -52,8 +58,8 @@ public class MatrixTest {
     @Test
     void testGetSizeMatrix() {
         Matrix matrix = new Matrix(new Vector[]{new Vector(new double[]{1, 2, 7}), new Vector(new double[]{2, 3, 5}), new Vector(new double[]{2, 3, 6})});
-        Assert.assertEquals((matrix.getRowCounts()), 3);
-        Assert.assertEquals((matrix.getColumnCounts()), 3);
+        Assert.assertEquals((matrix.getRowsCount()), 3);
+        Assert.assertEquals((matrix.getColumnsCount()), 3);
     }
 
     @Test
