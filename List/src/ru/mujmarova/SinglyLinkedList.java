@@ -170,7 +170,7 @@ public class SinglyLinkedList<T> {
         return clone;
     }
 
-    public void invert() {
+    public void reverse() {
         if (size == 0 || size == 1) {
             return;
         }
