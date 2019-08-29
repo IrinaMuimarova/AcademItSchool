@@ -83,9 +83,16 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 7, 8]");
         Assert.assertTrue(isRemove);
 
-        isRemove = list.remove((Integer)7);
+        isRemove = list.remove((Integer) 7);
         Assert.assertEquals(list.toString(), "[1, 2, 3, 4, 5, 6, 8]");
         Assert.assertTrue(isRemove);
+    }
+
+    @Test
+    public void removeFirstObject() {
+        initObjects();
+        boolean isRemove = list.remove((Integer) 1);
+        System.out.println(list.toString());
     }
 
     @Test
@@ -100,7 +107,7 @@ public class SinglyLinkedListTest {
     @Test
     void spreadTest() {
         initObjects();
-        list.invert();
+        list.reverse();
         Assert.assertEquals(list.toString(), "[8, 7, 6, 5, 4, 3, 2, 1]");
     }
 
@@ -114,5 +121,11 @@ public class SinglyLinkedListTest {
     void removeTest() {
         initObjects();
         Assert.assertEquals(list.remove(3), (Integer) 4);
+
+        SinglyLinkedList<Integer> list1 = new SinglyLinkedList<>();
+        list1.add(2);
+
+        Integer isRemove = list1.remove(0);
+        System.out.println(list1.toString() + " " + isRemove);
     }
 }
